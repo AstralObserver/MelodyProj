@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
+    {% endblock %}
+</head>
+<body>
+    <div id="header">
+        {% block header %}
+        <div id = "main_pages">
+            <a href="about.html">About Tool</a>
+        </div>
+        {% if current_user.is_authenticated %}
+        
+        <h1>Hello {{current_user.username}}!</h1>
+        <div id="personal_pages">
+            <a href="{{ url_for('auth.profile', username=current_user.username) }}">Your Page</a>
+        </div>
+        {% else %}
+        <div id="login">
+            <a href="{{ url_for('login')}}">Your Page</a>
+        </div>
+        {% endif %}
+        {% endblock %}
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2024 by Melody Musmacker.
+        {% endblock %}
+    </div>
+</body>
+</html>
